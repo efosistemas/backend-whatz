@@ -28,9 +28,9 @@ export class TodoController {
 		try {
 			const todo = await prisma.todo.create({
 				data: {
-				  completed: false,
+				  completed: req.body.completed ?? false,
 				  createdAt: new Date(),
-				  text: req.body.text ?? "Empty todo",
+				  text: req.body.text ?? "sem text",
 				},
 			  });
 				  
