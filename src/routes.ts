@@ -4,6 +4,7 @@ import { TodoController } from './controllers/TodoController'
 
 const routes = Router()
 
+routes.post('/login', new UserController().login)
 routes.post('/user', new UserController().create)
 routes.get('/users', new UserController().users)
 
