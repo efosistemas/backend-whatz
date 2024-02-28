@@ -61,12 +61,7 @@ app.delete("/todos/:id", async (req, res) => {
 app.get("/", async (req, res) => {
   res.send(
     `
-  <h1>Todo REST API</h1>
-  <h2>Available Routes</h2>
-  <pre>
-    GET, POST /todos
-    GET, PUT, DELETE /todos/:id
-  </pre>
+  <h1>User REST API</h1>
   `.trim(),
   );
 });
