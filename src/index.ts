@@ -16,7 +16,7 @@ app.use(routes);
 app.get("/", async (req, res) => {
   res.send(
     `
-  <h1>User REST API</h1>
+  <h1>User/Todo REST API</h1>
   `.trim(),
   );
 });
