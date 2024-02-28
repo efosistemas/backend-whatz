@@ -13,14 +13,6 @@ app.use(express.text({ type: "text/html" }));
 
 app.use(routes);
 
-app.get("/", async (req, res) => {
-  res.send(
-    `
-  <h1>User/Todo REST API</h1>
-  `.trim(),
-  );
-});
-
 app.listen(Number(port), "0.0.0.0", () => {
     console.log(`Example app listening at http://localhost:${port}`);
 });
