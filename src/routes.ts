@@ -11,5 +11,6 @@ routes.get('/users', authMiddleware, new UserController().users)
 routes.get('/profile', authMiddleware, new UserController().getProfile)
 
 routes.get('/mensagens', new MensagemController().mensagens)
+routes.post('/mensagem', new UserController().create)
 
 export default routes
