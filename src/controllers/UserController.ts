@@ -6,18 +6,20 @@ import jwt from 'jsonwebtoken';
 import redis from '../lib/cache';
 import { userInfo } from 'os';
 
-
-
 const prisma = new PrismaClient();
-
+const cacheKey = "users:all";
 
 export class UserController {
 	
 	async users(req: Request, res: Response) {
-        const cacheKey = "users:all";
-  
+
 		try {
 			
+			const cachedUsers = await redis.get(cacheKey);
+			if (cachedUsers) {
+				return res.json(JSON.parse(cachedUsers));
+			}
+
 		  	const users = await prisma.user.findMany({
 			  select: {
 				password: false,
@@ -32,6 +34,8 @@ export class UserController {
 			  ]
 			  });
 
+			  await redis.set(cacheKey, JSON.stringify(users));
+
 			  res.json(users);
 		  } catch (error) {
 			return res.status(500).json({ message: 'Internal Server Error' })
@@ -39,7 +43,6 @@ export class UserController {
 	};
 	  
 	async create(req: Request, res: Response) {
-        const cacheKey = "users:all";
 
 		const {name,email,password} = req.body;
 		if (!name) {
