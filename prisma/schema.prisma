@@ -21,8 +21,8 @@ model User {
 model Mensagem {
   id              String   @id @default(uuid())
   createdAt       DateTime @default(now())
-  descricao       String?
-  celular         String?
+  descricao       String
+  celular         String
   tokenConfirma   String   
   tokenCancela    String   
   dataResposta    DateTime 
