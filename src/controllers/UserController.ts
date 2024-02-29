@@ -10,15 +10,15 @@ import { userInfo } from 'os';
 
 const prisma = new PrismaClient();
 
-const cacheKey = "users:all";
 
 export class UserController {
 	
 	async users(req: Request, res: Response) {
+        const cacheKey = "users:all";
   
 		try {
 			
-			const cachedUsers = await redis.get(cacheKey)
+			const cachedUsers = await redis.get(cacheKey);
 			if (cachedUsers) {
 				return res.json(JSON.parse(cachedUsers));
 			}
@@ -46,6 +46,8 @@ export class UserController {
 	};
 	  
 	async create(req: Request, res: Response) {
+        const cacheKey = "users:all";
+
 		const {name,email,password} = req.body;
 		if (!name) {
 		  return res.status(400).json({ message: 'O nome é obrigatório' })
