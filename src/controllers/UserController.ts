@@ -7,11 +7,12 @@ import redis from '../lib/cache';
 import { userInfo } from 'os';
 
 const prisma = new PrismaClient();
-const cacheKey = "users:all";
 
 export class UserController {
 	
 	async users(req: Request, res: Response) {
+
+		const cacheKey = "users:all";
 
 		try {
 			
@@ -43,6 +44,8 @@ export class UserController {
 	};
 	  
 	async create(req: Request, res: Response) {
+
+		const cacheKey = "users:all";
 
 		const {name,email,password} = req.body;
 		if (!name) {
@@ -77,7 +80,7 @@ export class UserController {
 		} catch (error) {
 			return res.status(500).json({ message: 'Internal Server Error' })
 		}
-		  
+
 	};
 	  
 	async login(req: Request, res: Response) {
