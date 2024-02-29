@@ -3,8 +3,6 @@ import { Request, Response } from 'express'
 import { PrismaClient } from "@prisma/client";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import redis from '../lib/cache';
-import { userInfo } from 'os';
 
 const prisma = new PrismaClient();
 
@@ -12,15 +10,8 @@ export class UserController {
 	
 	async users(req: Request, res: Response) {
 
-		const cacheKey = "users:all";
-
 		try {
 			
-			const cachedUsers = await redis.get(cacheKey);
-			if (cachedUsers) {
-				return res.json(JSON.parse(cachedUsers));
-			}
-
 		  	const users = await prisma.user.findMany({
 			  select: {
 				password: false,
@@ -35,8 +26,6 @@ export class UserController {
 			  ]
 			  });
 
-			  await redis.set(cacheKey, JSON.stringify(users));
-
 			  res.json(users);
 		  } catch (error) {
 			return res.status(500).json({ message: 'Internal Server Error' })
@@ -44,8 +33,6 @@ export class UserController {
 	};
 	  
 	async create(req: Request, res: Response) {
-
-		const cacheKey = "users:all";
 
 		const {name,email,password} = req.body;
 		if (!name) {
@@ -74,8 +61,6 @@ export class UserController {
 		  }); 
 		  const { password: _, ...user } = newUser
 		  
-		  redis.del(cacheKey);
-
 		  return res.json(user);
 		} catch (error) {
 			return res.status(500).json({ message: 'Internal Server Error' })
