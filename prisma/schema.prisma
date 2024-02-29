@@ -23,8 +23,8 @@ model Mensagem {
   createdAt       DateTime @default(now())
   descricao       String
   celular         String
-  tokenConfirma   String   
-  tokenCancela    String   
-  dataResposta    DateTime 
-  resposta        String   
+  tokenConfirma   String?   
+  tokenCancela    String?   
+  dataResposta    DateTime? 
+  resposta        String?   
 }
