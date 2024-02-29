@@ -18,9 +18,13 @@ model User {
   password  String
 }
 
-model Todo {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  text      String
-  completed Boolean
+model Mensagem {
+  id              String   @id @default(uuid())
+  createdAt       DateTime @default(now())
+  descricao       String
+  celular         String
+  tokenConfirma   String
+  tokenCancela    String
+  dataResposta    DateTime
+  resposta        String
 }
