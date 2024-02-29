@@ -18,11 +18,6 @@ export class UserController {
   
 		try {
 			
-			const cachedUsers = await redis.get(cacheKey);
-			if (cachedUsers) {
-				return res.json(JSON.parse(cachedUsers));
-			}
-
 		  	const users = await prisma.user.findMany({
 			  select: {
 				password: false,
@@ -36,8 +31,6 @@ export class UserController {
 				},
 			  ]
 			  });
-
-			  await redis.set(cacheKey, JSON.stringify(users));
 
 			  res.json(users);
 		  } catch (error) {
