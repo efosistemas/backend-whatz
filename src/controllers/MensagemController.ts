@@ -5,7 +5,15 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export class MensagemController {
+
+
+
 	
+	async confirmaPresenca(req: Request, res: Response) {
+		res.json(req.params.hash);
+
+	}
+		
 	async mensagens(req: Request, res: Response) {
 
 		try {
