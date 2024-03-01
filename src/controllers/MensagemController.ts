@@ -10,7 +10,7 @@ export class MensagemController {
 
 	
 	async confirmaPresenca(req: Request, res: Response) {
-		res.json(req.params.hash);
+		return res.status(500).json({ message: req.params.hash })
 
 	}
 		
