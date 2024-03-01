@@ -13,6 +13,6 @@ routes.get('/profile', authMiddleware, new UserController().getProfile)
 
 routes.post('/mensagem', authMiddleware, new MensagemController().create)
 routes.get('/mensagens', authMiddleware, new MensagemController().mensagens)
-routes.get('/presenca/token/:hash', authMiddleware, new MensagemController().confirmaPresenca)
+routes.get('/presenca/token/:hash', new MensagemController().confirmaPresenca)
 
 export default routes
