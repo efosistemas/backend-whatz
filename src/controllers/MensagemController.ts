@@ -11,8 +11,8 @@ export class MensagemController {
 		const idMensagem = req.params.hash.substring(1);
 	
 		const mensagem = await prisma.mensagem.findFirst({where: {id: idMensagem}});
-
-		const newMensagem = await prisma.mensagem.update({
+		if (mensagem) {
+			const newMensagem = await prisma.mensagem.update({
 				where: {
 					id: idMensagem
 				},
@@ -20,7 +20,9 @@ export class MensagemController {
 					resposta: opcao,
 		    	} 
 			})
-		return res.json({opcao: opcao, mensagem: newMensagem});
+			return res.json({opcao: opcao, mensagem: newMensagem});
+		}
+			
 	}
 	
 	async mensagens(req: Request, res: Response) {
