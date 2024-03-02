@@ -7,8 +7,11 @@ const prisma = new PrismaClient();
 export class MensagemController {
 
 	async confirmaPresenca(req: Request, res: Response) {
-		const mensagem = await prisma.mensagem.findFirst({where: {id: req.params.hash}});
-	    return res.json(mensagem)
+		const opcao = req.params.hash.substring(0,1);
+		const idMensagem = req.params.hash.substring(1);
+
+		const mensagem = await prisma.mensagem.findFirst({where: {id: idMensagem}});
+	    return res.json({opcao: opcao, mensagem: mensagem});
 
 	}
 	
