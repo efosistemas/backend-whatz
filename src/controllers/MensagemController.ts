@@ -9,10 +9,10 @@ export class MensagemController {
 	async confirmaPresenca(req: Request, res: Response) {
 		const opcao = req.params.hash.substring(0,1);
 		const idMensagem = req.params.hash.substring(1);
+		return res.json({opcao: opcao, idMensagem: idMensagem});
 
-		const mensagem = await prisma.mensagem.findFirst({where: {id: idMensagem}});
-	    return res.json({opcao: opcao, mensagem: mensagem});
-
+	//	const mensagem = await prisma.mensagem.findFirst({where: {id: idMensagem}});
+	
 	}
 	
 	async mensagens(req: Request, res: Response) {
